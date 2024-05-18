@@ -3,35 +3,28 @@ on:
   push:
     branches:
       - main
-      - feature/**
   pull_request:
     branches:
       - main
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
       with:
-        node-version: '16.x'
+        node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: npm install
-    - name: Run ESLint
-      run: npm run lint
-    - name: Run Prettier
-      run: npm run format:check
+      run: yarn install
+    - name: Lint code
+      run: yarn lint
     - name: Run tests
-      run: npm test
-    - name: Build Docker image
-      run: docker build -t deepakshiwani2000/nextjs-app .
-    - name: Push Docker image
-      run: |
-        docker tag deepakshiwani2000/nextjs-app:latest deepakshiwani2000/nextjs-app:${{ github.sha }}
-        docker push deepakshiwani2000/nextjs-app:latest
-        docker push deepakshiwani2000/nextjs-app:${{ github.sha }}
-    - name: Deploy to staging
-      run: echo "Deploying Next.js application to staging..."
-    
+      run: yarn test
+    - name: Build project
+      run: yarn build

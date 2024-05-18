@@ -1,5 +1,5 @@
 {
-    "name": "yourusername/wordpress-site",
+    "name": "deepakshiwani2000/wordpress-site",
     "description": "A sample WordPress site with CI/CD and Docker integration",
     "require": {
       "johnpbloch/wordpress-core": "^5.8"
