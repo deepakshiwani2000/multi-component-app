@@ -16,5 +16,5 @@ This assignment builds upon the use of technology stack to include Go, Next.js, 
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/YOUR_USERNAME/multi-component-app.git
+   git clone https://github.com/deepakshiwani2000/multi-component-app.git
    cd multi-component-app
